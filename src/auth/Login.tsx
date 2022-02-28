@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { auth, logInWithEmailAndPassword, logInWithGoogle } from "../firebase";
+import { useNavigate } from "react-router-dom";
+import { auth, logInWithGoogle } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import "./login.css";
+import "./login.scss";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -20,11 +20,9 @@ function Login() {
 
   return (
     <div className="login">
-      <div className="login__container">
-        <button className="login__btn login__google" onClick={logInWithGoogle}>
-          Login with Google
-        </button>
-      </div>
+      <button className="login__google" onClick={logInWithGoogle}>
+        Login with Google
+      </button>
     </div>
   );
 }
