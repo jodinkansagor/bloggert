@@ -1,0 +1,30 @@
+@import "./common//scssVariables.scss";
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    padding-top: 16px;
+    padding-bottom: 8px;
+    color: $prussian-blue;
+  }
+
+  &__input {
+    border: 2px solid $sky-blue
+  }
+
+  &__buttonContainer {
+    width: 300px;
+    padding-top: 32px
+  }
+
+  &__emptyState {
+    text-align: center;
+    color: $sky-blue
+  }
+}

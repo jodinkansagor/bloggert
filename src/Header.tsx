@@ -1,13 +1,20 @@
 import React from 'react'
 import "./header.scss"
+import tefillin from "./assets/newTefillin.png"
+import { useNavigate } from 'react-router-dom'
 
 function Header() {
+  const navigate = useNavigate()
+
   return (
-    <div className="header">
-      <h1 className="header__title">Undoing</h1>
-      <h3 className="header__subTitle">Breaking up with my Zionist past.</h3>
+    <div className="header" onClick={() => navigate("/")}>
+      <img className="header__img" src={tefillin} alt="graphic of tefillin" />
+      <div>
+        <h1 className="header__title">UnWrapping</h1>
+        <h3 className="header__subTitle">Breaking up with my Zionist past.</h3>
+      </div>
     </div>
   )
 }
 
-export default Header
+export default Header;

@@ -1,20 +1,22 @@
 import './App.scss';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./auth/Login"
-// import Register from './auth/Register';
 import Blog from './Blog';
 import Header from './Header';
+import NewPost from './NewPost';
+import BlogPost from './BlogPost';
 
 function App() {
   return (
     <div className="app">
       <div className="app__container">
-        <Header />
         <Router>
+          <Header />
           <Routes>
-            <Route path="/" element={<Login />} />
-            {/* <Route exact path="/register" element={<Register />} /> */}
-            <Route path="/blog" element={<Blog />} />
+            <Route path="/" element={<Blog />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/post" element={<NewPost />} />
+            <Route path="/:id" element={<BlogPost />} />
           </Routes>
         </Router>
       </div>

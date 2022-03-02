@@ -1,46 +1,67 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
-// import "./Dashboard.css";
 import { auth, db, logout } from "./firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
+import useStore, { FullPost } from "./common/store";
+import "./blog.scss"
+import { Link } from "react-router-dom";
 
 function Blog() {
-  const [user, loading, error] = useAuthState(auth);
-  const [name, setName] = useState("");
-  const navigate = useNavigate();
+  const [user, loading] = useAuthState(auth);
 
-  console.log(user)
+  const setPosts = useStore((state) => state.setPosts)
+  const posts = useStore((state) => state.posts)
 
-  const fetchUserName = async () => {
+  const fetchPosts = async () => {
     try {
-      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+      const q = query(collection(db, "posts"))
       const doc = await getDocs(q);
-      const data = doc.docs[0].data();
-      console.log(data, "DATA")
-      setName(data.name);
+      const arrayOfDocs = doc.docs.map((element) => {
+        const elementData = { ...element.data(), id: element.id }
+        return elementData
+      })
+      setPosts(arrayOfDocs.reverse() as FullPost[])
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
-  };
+  }
+
+  useEffect(() => {
+    fetchPosts()
+  }, [])
 
   useEffect(() => {
     if (loading) return;
-    if (!user) return navigate("/");
-    fetchUserName();
   }, [user, loading]);
 
+
   return (
-    <div className="dashboard">
-       <div className="dashboard__container">
-        Logged in as
-         <div>{name}</div>
-         <div>{user?.email}</div>
-         <button className="dashboard__btn" onClick={logout}>
-          Logout
-         </button>
-       </div>
-     </div>
+    <div className="blog">
+      <div className="blog__innerContainer">
+        <ul className="blog__list">
+          {posts && posts.map((post, index) => {
+            return (
+              <li className="blog__listItem" key={index}>
+                <img className="blog__listItem-image" src={post.urlForImage} alt={post.altText} id="myImg" />
+                <h4>{post.title}</h4>
+                <p>{post.date}</p>
+                <Link to={`/:${post.id}`} className="blog__listItem-link" state={{ id: post.id }}>Read full post</Link>
+              </li>
+            )
+          })}
+        </ul>
+        {user &&
+         <div className="blog__loggedIn">
+          Logged in as
+          <div>{user.displayName}</div>
+          <div>{user?.email}</div>
+          <button className="dashboard__btn" onClick={logout}>
+            Logout
+          </button>
+        </div>
+        }
+      </div>
+    </div>
   );
 }
 export default Blog;
