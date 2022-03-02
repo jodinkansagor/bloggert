@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-bottom: 32px;
+  cursor: pointer;
+  padding: 24px;
+
+  &__title {
+    margin-top: 0px;
+    margin-bottom: 8px
+  }
+  &__subTitle {
+    margin-top: 0px;
+    margin-bottom: -3px
+  }
+
+  &__img {
+    width: 150px;
+    margin-right: 16px
+  }
+}
+@media only screen and (max-width: 600px) {
+  .header {
+    padding: 14px 16px
+  }
+}

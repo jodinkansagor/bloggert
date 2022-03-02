@@ -1,0 +1,26 @@
+@import "../common//scssVariables.scss";
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 36px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #dcdcdc;
+    padding: 30px;
+  }
+
+  &__google {
+    background-color: $prussian-blue;
+    color: $white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    filter: drop-shadow(0px 2px 2px $midnight);
+    font-size: 24px;
+  }
+}

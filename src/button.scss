@@ -1,0 +1,19 @@
+@import "./common//scssVariables.scss";
+
+.button {
+  background-color: $prussian-blue;
+  color: $white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  filter: drop-shadow(0px 2px 2px $midnight);
+  font-size: 24px;
+
+  &.sm {
+    font-size: 16px
+  }
+
+  &.lg {
+    font-size: 32px
+  }
+}
