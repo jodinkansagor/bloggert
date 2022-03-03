@@ -27,7 +27,7 @@ function BlogPost() {
   }, [fetchPost])
 
 
-  const formatPost = (post) => {
+  const formatPost = (post: string) => {
     const arrayOfParagraphs: string[] = post?.split('/n')
     return arrayOfParagraphs.map(paragraph => (
       <>

@@ -1,6 +1,6 @@
 import { addDoc, collection } from 'firebase/firestore'
 import { useAuthState } from "react-firebase-hooks/auth";
-import React, { useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { db, auth } from './firebase'
 import "./newPost.scss"
@@ -14,7 +14,7 @@ function NewPost() {
   const navigate = useNavigate()
   const [user] = useAuthState(auth);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     const fullPost = {
       title,
