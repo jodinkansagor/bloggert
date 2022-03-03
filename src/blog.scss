@@ -28,6 +28,9 @@
     &-link {
       text-decoration: none;
       color: $sky-blue;
+      &:hover {
+        color: $prussian-blue
+      }
     }
     &-image {
       width: 100%;
