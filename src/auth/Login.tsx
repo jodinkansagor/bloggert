@@ -15,7 +15,6 @@ import {
   getDocs
 } from "firebase/firestore";
 import Button from "../Button";
-import useStore from "../common/store";
 
 function Login() {
   const [user, loading, error] = useAuthState(auth);
@@ -52,7 +51,7 @@ function Login() {
     if (user) {
       navigate("/");
     }
-  }, [user, loading, error]);
+  }, [user, loading, error, navigate]);
 
   return (
     <div className="login">

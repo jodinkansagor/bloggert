@@ -33,7 +33,7 @@ function NewPost() {
     navigate("/")
   }
 
-  if(user?.email != 'joedvice@gmail.com') return <h3 className="form__emptyState">You don't have access to this feature. Please return to the main blog.</h3>
+  if(user?.email !== 'joedvice@gmail.com') return <h3 className="form__emptyState">You don't have access to this feature. Please return to the main blog.</h3>
 
   return (
     <div className="form">
