@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db, logout } from "./firebase";
-import { query, collection, getDocs, where } from "firebase/firestore";
+import { query, collection, getDocs } from "firebase/firestore";
 import useStore, { FullPost } from "./common/store";
 import "./blog.scss"
 import { Link } from "react-router-dom";
+import { useCallback } from "react";
 
 function Blog() {
   const [user, loading] = useAuthState(auth);
@@ -12,7 +13,7 @@ function Blog() {
   const setPosts = useStore((state) => state.setPosts)
   const posts = useStore((state) => state.posts)
 
-  const fetchPosts = async () => {
+  useCallback(async() => {
     try {
       const q = query(collection(db, "posts"))
       const doc = await getDocs(q);
@@ -24,11 +25,7 @@ function Blog() {
     } catch (err) {
       console.error(err)
     }
-  }
-
-  useEffect(() => {
-    fetchPosts()
-  }, [])
+  },[setPosts])()
 
   useEffect(() => {
     if (loading) return;

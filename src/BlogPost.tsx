@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useParams, Link } from "react-router-dom";
 import { collection, where, query, getDocs, documentId, DocumentData } from "firebase/firestore";
 import { db } from "./firebase";
 import loadingGif from "./assets/loadingGif.gif"
 
 import "./blogPost.scss"
-import { FullPost } from './common/store';
 
 function BlogPost() {
   const { id } = useParams()
   const [post, setPost] = useState<DocumentData | undefined>(undefined)
   const formattedId = id.split(":")[1]
 
-  const fetchPost = async () => {
+  useCallback( async() => {
     try {
       const q = query(collection(db, 'posts'), where(documentId(), "==", formattedId))
       const doc = await getDocs(q)
@@ -21,16 +20,12 @@ function BlogPost() {
     } catch (err) {
       console.error(err)
     }
-  }
-
-  useEffect(() => {
-    fetchPost()
-  }, [])
+  },[formattedId])()
 
   if (!post) {
     return (
       <div className="blogPost__loadingContainer">
-        <img className="blogPost-loading" src={loadingGif} />
+        <img className="blogPost-loading" src={loadingGif} alt="loading spinner" />
       </div>
     )
   } else
