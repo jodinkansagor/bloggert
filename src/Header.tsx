@@ -1,6 +1,6 @@
 import React from 'react'
 import "./header.scss"
-import tefillin from "./assets/newTefillin.png"
+import tallit from "./assets/tallitB.png"
 import { useNavigate } from 'react-router-dom'
 
 function Header() {
@@ -8,8 +8,8 @@ function Header() {
 
   return (
     <div className="header" onClick={() => navigate("/")}>
-      <img className="header__img" src={tefillin} alt="graphic of tefillin" />
-      <div>
+      <img className="header__img" src={tallit} alt="graphic of tefillin" />
+      <div className="header__text">
         <h1 className="header__title">UnWrapping</h1>
         <h3 className="header__subTitle">Breaking up with my Zionist past.</h3>
       </div>
