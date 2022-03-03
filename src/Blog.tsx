@@ -13,7 +13,7 @@ function Blog() {
   const setPosts = useStore((state) => state.setPosts)
   const posts = useStore((state) => state.posts)
 
-  useCallback(async() => {
+  const fetchPosts = useCallback(async() => {
     try {
       const q = query(collection(db, "posts"))
       const doc = await getDocs(q);
@@ -25,7 +25,11 @@ function Blog() {
     } catch (err) {
       console.error(err)
     }
-  },[setPosts])()
+  },[setPosts])
+
+  useEffect(() => {
+    fetchPosts()
+  },[fetchPosts])
 
   useEffect(() => {
     if (loading) return;
